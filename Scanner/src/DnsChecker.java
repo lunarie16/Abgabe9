@@ -9,7 +9,7 @@ public class DnsChecker {
 
 	public static void main(String[] args) throws TextParseException {
 	zone = args[0];
-	//	zone = "beuth-hochschule.de";
+//		zone = "beuth-hochschule.de";
 
 		// WEBMAIL
 		System.out.println("Mailserver:");
@@ -47,6 +47,7 @@ public class DnsChecker {
 				System.out.println("IPv6: " + ((AAAARecord) ipv6[i]).getAddress().getHostAddress());
 			}
 		}
+		else System.out.println("IPv6: ---");
 	}
 
 }
