@@ -13,8 +13,7 @@ public class DnsChecker {
 
 		// WEBMAIL
 		System.out.println("Mailserver:");
-		int webmail = MX;
-		Lookup lookup = new Lookup(zone, webmail);
+		Lookup lookup = new Lookup(zone, MX);
 		org.xbill.DNS.Record[] web = lookup.run();
 		for (int i = 0; i < web.length; i++) {
 			System.out.println(web[i].getAdditionalName());
@@ -23,8 +22,7 @@ public class DnsChecker {
 		System.out.println();
 		System.out.println("DNS-Server:");
 		// DNS-SERVER
-		int dns_1 = NS;
-		lookup = new Lookup(zone, dns_1);
+		lookup = new Lookup(zone, NS);
 		org.xbill.DNS.Record[] dns = lookup.run();
 		for (int i = 0; i < dns.length; i++) {
 			System.out.println(dns[i].getAdditionalName());
@@ -35,20 +33,18 @@ public class DnsChecker {
 		zone = "www." + zone;
 
 		// IPv4
-		int ipv4 = A;
-		lookup = new Lookup(zone, ipv4);
-		org.xbill.DNS.Record[] ip4 = lookup.run();
-		for (int i = 0; i < ip4.length; i++) {
-			System.out.println("IPv4: " + ((ARecord) ip4[i]).getAddress().getHostAddress());
+		lookup = new Lookup(zone, A);
+		org.xbill.DNS.Record[] ipv4 = lookup.run();
+		for (int i = 0; i < ipv4.length; i++) {
+			System.out.println("IPv4: " + ((ARecord) ipv4[i]).getAddress().getHostAddress());
 		}
 
 		// IPv6
-		int ipv6 = AAAA;
-		lookup = new Lookup(zone, ipv6);
-		org.xbill.DNS.Record[] ip6 = lookup.run();
-		if (ip6.length > 0) {
-			for (int i = 0; i < ip6.length; i++) {
-				System.out.println("IPv6: " + ((AAAARecord) ip6[i]).getAddress().getHostAddress());
+		lookup = new Lookup(zone, AAAA);
+		org.xbill.DNS.Record[] ipv6 = lookup.run();
+		if (ipv6.length > 0) {
+			for (int i = 0; i < ipv6.length; i++) {
+				System.out.println("IPv6: " + ((AAAARecord) ipv6[i]).getAddress().getHostAddress());
 			}
 		}
 	}
